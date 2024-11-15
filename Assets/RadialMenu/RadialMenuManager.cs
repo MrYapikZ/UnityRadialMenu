@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ namespace FloxyDev.RadialMenu
 {
     public class RadialMenuManager : MonoBehaviour
     {
+        public static RadialMenuManager Instance;
         [SerializeField, Range(2, 10)] private int numberOfRadialPart;
         [SerializeField, Range(0, 100)] private float radialPartsGap;
         [SerializeField] private GameObject radialPartPrefab;
@@ -18,7 +20,12 @@ namespace FloxyDev.RadialMenu
 
         private readonly List<GameObject> _spawnedRadialParts = new List<GameObject>();
         private int _currentSelectedRadialPart;
-        
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
